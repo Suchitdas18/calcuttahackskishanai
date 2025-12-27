@@ -17,11 +17,11 @@ COPY ./src /code/src
 RUN mkdir -p /code/temp && chmod 777 /code/temp
 RUN mkdir -p /tmp && chmod 777 /tmp
 
-# Expose port
-EXPOSE 8000
+# Expose port (Hugging Face Spaces uses 7860)
+EXPOSE 7860
 
 # Set environment variable
-ENV PORT=8000
+ENV PORT=7860
 
 # Run the Flask application with gunicorn
-CMD ["gunicorn", "src.app:app", "--bind", "0.0.0.0:8000", "--timeout", "120"]
+CMD ["gunicorn", "src.app:app", "--bind", "0.0.0.0:7860", "--timeout", "120", "--workers", "1"]
